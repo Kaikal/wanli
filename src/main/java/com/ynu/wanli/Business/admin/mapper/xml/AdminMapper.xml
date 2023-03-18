@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ynu.wanli.Business.admin.mapper.AdminMapper">
+
+<select id="doLogin" resultType="com.ynu.wanli.Business.admin.dto.Admin">
+select * from admin_admin where adminAccount=#{param1} and adminPwd=#{param2}
+</select></mapper>

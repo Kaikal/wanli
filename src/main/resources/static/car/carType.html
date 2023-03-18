@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>车辆管理</title>
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="../css/bootstrap.min.css?v=3.3.7" rel="stylesheet">
+    <link href="../css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <!-- Data Tables -->
+    <link href="../css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+
+    <link href="../css/animate.css" rel="stylesheet">
+    <link href="../css/style.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>基本 <small>分类，查找</small></h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="table_data_tables.html#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="table_data_tables.html#">选项1</a>
+                            </li>
+                            <li><a href="table_data_tables.html#">选项2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="">
+                        <a data-toggle="modal" data-target="#myModal" href="javascript:void(0);" class="btn btn-primary ">添加行</a>
+                    </div>
+                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                        <thead>
+                        <tr>
+                            <th>车辆ID</th>
+                            <th>车牌号</th>
+                            <th>司机电话</th>
+                            <th>司机ID</th>
+                            <th>路线</th>
+                            <th>状态</th>
+                            <!--                                    <th>创建时间</th>-->
+                            <!--                                    <th>修改时间</th>-->
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="listBody">
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th>车辆ID</th>
+                            <th>车牌号</th>
+                            <th>司机电话</th>
+                            <th>司机ID</th>
+                            <th>路线</th>
+                            <th>状态</th>
+                            <!--                                    <th>创建时间</th>-->
+                            <!--                                    <th>修改时间</th>-->
+                            <th>操作</th>
+                        </tr>
+                        </tfoot>
+                    </table>
+                    <div class="modal inmodal" id="myModal" tabindex="300" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content animated bounceInRight">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" onclick="clearModel()"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+                                    </button>
+                                    <h4 class="modal-title">车次表</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="form-group" id="modal-form">
+                                        <label>车辆ID</label><input type="number" name="orderId" readonly="readonly" class="form-control mCarId">
+                                        <label>车牌号</label><input type="text" name="orderDriver" placeholder="用户名" class="form-control mCarCard">
+                                        <label>司机号码</label><input type="text" name="orderStartTime" placeholder="实名" class="form-control mCarPhone">
+                                        <label>司机ID</label><select type="number" name="orderCard" placeholder="生日" class="form-control mCarPerson"></select>
+                                        <label>路线</label> <input type="number" name="orderEndTime" placeholder="生日" class="form-control mCarRoute">
+                                        <label>状态</label> <input type="number" name="orderViPSite" placeholder="请输入您的手机号" class="form-control mCarState">
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-white" data-dismiss="modal" onclick="clearModel()">关闭</button>
+                                    <button type="button" class="btn btn-primary" onclick="submitModal(this)">保存</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- 全局js -->
+<script src="../js/jquery.min.js?v=2.1.4"></script>
+<script src="../js/bootstrap.min.js?v=3.3.7"></script>
+
+
+
+<script src="../js/plugins/jeditable/jquery.jeditable.js"></script>
+
+<!-- Data Tables -->
+<script src="../js/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="../js/plugins/dataTables/dataTables.bootstrap.js"></script>
+
+<!-- 自定义js -->
+<script src="../js/content.js?v=1.0.0"></script>
+
+
+<!-- Page-Level Scripts -->
+<script>
+    $(document).ready(function () {
+        initTable()
+        getDriver()
+    });
+    function initTable(){
+        var pageNum;
+        var htmls='';
+        $.ajax({
+            url : "/car1/getCars",
+            success:function(data) {
+                $("#listBody").html('')
+                for (var index in data.data) {
+                    htmls +=
+                        '<tr className = "gradeX" class="grade">'+
+                        '<td class = "id">' + data.data[index].carId + '</td>' +
+                        '<td class="carCard">' + data.data[index].carCard + '</td>' +
+                        '<td class="carPhone">' + data.data[index].carPhone + '</td>' +
+                        '<td class="center carPerson">' + data.data[index].carPerson + '</td>' +
+                        '<td class="center carRoute">' + data.data[index].carRoute + '</td>'+
+                        '<td class="carState">' + data.data[index].carState + '</td>' +
+                        '<td class="center">' +
+                        '<button class="btn btn-primary" id="update" data-toggle="modal" data-target="#myModal" data-backdrop="false" onClick="initModel(this)">修改</button>' +
+                        '<button class="btn btn-primary" onClick="toDelete(this)">删除</button>' +
+                        '</td>' +
+                        '</tr>\n'
+                }
+                var body=document.getElementById('listBody');
+                body.innerHTML = htmls
+                $('.dataTables-example').dataTable();
+            }
+        })
+    }
+    function initModel(obj){
+        var tOj=$(obj).parent().parent();
+        const id=parseInt( $(tOj).children(".id").text())
+        $(".mCarId").val(id);
+        $(".mCarCard").val($(tOj).children(".carCard").text())
+        $(".mCarPhone").val($(tOj).children(".carPhone").text())
+        $(".mCarPerson").val(parseInt($(tOj).children(".carPerson").text()))
+        $(".mCarRoute").val(parseInt($(tOj).children(".carRoute").text()))
+        $(".mCarState").val(parseInt($(tOj).children(".carState").text()))
+        var form=$("#modal-form")
+        return form
+    }
+    function submitModal(obj) {
+        var data = {
+            carId: $(".mCarId").val(),
+            carCard: $(".mCarCard").val(),
+            carPerson: $(".mCarPerson").val(),
+            carPhone: $(".mCarPhone").val(),
+            carState: $(".mCarState").val(),
+            carRoute: $(".mCarRoute").val(),
+        }
+        console.log(data)
+        if (data.carId == null || data.carId == '') {
+            addCar(data)
+        } else {
+            updateCar(data)
+        }
+    }
+    function addCar(data) {
+            console.log("添加")
+            $.ajax({
+                url : "/car1/addCar",
+                type: "POST",
+                data: JSON.stringify(data),
+                processData: false,  // 不处理数据
+                contentType: "application/json;charset=UFT-8",   // 不设置内容类型
+                success:function(data){
+                    initTable()
+                }
+            })
+        }
+    function updateCar(data) {
+            console.log("更新")
+            $.ajax({
+                url : "/car1/updateCar",
+                type: "POST",
+                data: JSON.stringify(data),
+                processData: false,  // 不处理数据
+                contentType: "application/json;charset=UFT-8",   // 不设置内容类型
+                success:function(data){
+                    initTable()
+                }
+            })
+        }
+    function toDelete(obj) {
+        parent.layer.open({
+            type: 0,
+            skin: 'layui-layer-demo', //样式类名
+            closeBtn: 1, //不显示关闭按钮
+            shift: 2,
+            shadeClose: true, //开启遮罩关闭
+            content: '确认删除？',
+            yes:function () {
+
+
+                const tOj = $(obj).parent().parent();
+                const id = parseInt($(tOj).children(".id").text())
+                console.log(id)
+                $.ajax({
+                        url: "/car1/deleteCar",
+                        type: "post",
+                        data: {"id": id},
+                        success: function () {
+                            initTable();
+                        }
+                    }
+                )
+            }})
+    }
+    function clearModel(){
+        $(".mCarId").val('');
+        $(".mCarCard").val('')
+        $(".mCarPhone").val('')
+        $(".mCarPerson").val('')
+        $(".mCarRoute").val('')
+        $(".mCarState").val('')
+    }
+    function getDriver() {
+        // var htmls = '';
+        $.ajax({
+            url: "/driver1/aliveDriver",
+            success: function (data) {
+                console.log(data)
+                for (var index in data.data) {
+                    $(".mCarPerson").append('<option class = "id" value=' + data.data[index].driverId + '>' + data.data[index].driverId + '</option>')
+                }
+            },
+            error:function (data) {
+                console.log(data);
+            }
+        })
+    }
+</script>
+
+<!--    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>-->
+<!--统计代码，可删除-->
+
+</body>
+
+</html>

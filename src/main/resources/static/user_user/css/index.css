@@ -1,0 +1,153 @@
+.indexCont{
+    margin-left: 390px;
+    margin-top: 20px;
+}
+body{
+    margin: 0px;
+    background-color: #ffffff;
+}
+.rotationImg{
+    width: 778px;
+    height: 440px;
+}
+.itemList{
+    margin-left: -196px;
+    background-color: #ffffff;
+}
+.imgRight{
+    opacity: 0.5;
+    height: 13px;
+}
+.MenuTable{
+    background-color: #5f5750;
+    text-align: center;
+    color: #ffffff;
+    margin-left: 140px;
+}
+.img6{
+    width: 30px;
+    color: #ffffff;
+    opacity: 0.5;
+}
+.menuText{
+    opacity: 0.5;
+    font-size: 10px;
+}
+.SecondSec{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.secondinfo{
+    float: left;
+}
+.Note12img{
+    width: 315px;
+}
+.tdStyle{
+    opacity: 0.7;
+    width: 73px;
+    height: 80px;
+}
+.tdStyle:hover{
+    opacity: 1;
+}
+.secondImg{
+    margin-left: 20px;
+}
+.mess{
+    cursor: pointer;
+}
+.logOut{
+    margin-left: 13px;
+    color: #157375;
+    font-size: 12px;
+    cursor: pointer;
+    vertical-align: sub;
+}
+.logOut:hover{
+    color: #00f7de;
+}
+.longImgDiv{
+    margin-top: 30px;
+    text-align: center;
+}
+#longImg{
+    width: 82%;
+}
+.moreMess{
+    width: 90%;
+    margin-left: 15px;
+    margin-top: 20px;
+}
+.leftMess{
+    font-family: "等线";
+    font-size: 30px;
+    float: left;
+}
+.phoneName{
+    display: inline-block;
+}
+.phonePrice{
+    display: inline-block;
+    font-size: 12px;
+}
+.moreMessView{
+    float: right;
+}
+.showMes{
+    text-align: center;
+    font-size: 15px;
+}
+.adContainer{
+    width: 195px;
+    height: 500px;
+    display: inline-block;
+}
+.rowLongImg{
+    width: 195px;
+}
+.carListContainer{
+    display: inline;
+}
+table{
+    display: inline;
+}
+.colLongImg{
+    width: 250px;
+}
+.itemList{
+    background-color: #F5F5F5;
+    width: 1200px;
+}
+.mess:hover{
+    transform: translate(0,-10,0);
+    box-shadow: 15px 15px 15px rgba(1, 1, 1, 0.2);
+}
+.adContainer:hover{
+    transform: translate(0,-10,0);
+    box-shadow: 15px 15px 15px rgba(1, 1, 1, 0.2);
+}
+#moreMessContainer:hover{
+    background-color: #ffffff;
+}
+.phoneIntr{
+    color: #b0b0b0;
+    font-size: 10px;
+}
+.phonePrice{
+    color: #ff6a00;
+}
+footer{
+    padding: 20px 0;
+    border: 1;
+    margin-top: 150px;
+    height: 100px;
+    background-color: #f3f1f1;
+}
+.moreA{
+    color: #393939;
+    text-decoration:none;
+}
+.moreA:hover{
+    color: #ff6a00;
+}

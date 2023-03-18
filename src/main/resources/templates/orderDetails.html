@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>查看订单</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="/user_user/css/layui.css"  media="all">
+  <link rel="stylesheet" type="text/css" href="/user_user/css/about.css">
+  <script src="/user_user/js/jquery-3.3.1.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="/user_user/js/about.js"></script>
+</head>
+<body>
+
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+  <legend>订单信息确认</legend>
+</fieldset>
+
+<form class="layui-form" id="messForm" action="">
+  <div class="layui-form-item" style="display: inline-block">
+    <label class="layui-form-label">车牌：</label>
+    <div class="layui-input-inline">
+      <input type="text" name="title" id="account" th:value="${viewOrder.userCar.carCard}" autocomplete="off" style="cursor: default" readonly class="layui-input">
+    </div>
+  </div>
+  <div style="display: inline-block;margin-left: 150px">
+    <div style="text-align: center">总价格:<span style="color: red;font-size: 25px" th:text="((${viewOrder.userCar.carPrice})*((${viewOrder.userOrder.getOrderVipSite()})+(${viewOrder.userOrder.getOrderOrdinary()})+(${viewOrder.userOrder.getOrderNoSite()})))"></span>元</div></div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">路线：</label>
+    <div class="layui-input-inline">
+      <input type="text" name="date" id="date" th:value="${viewOrder.userCar.carRoute}" oninput = "value=value.replace(/[^\d]/g,'')" readonly lay-verify="date" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+  <div class="passMess" id="passMess" style="border: 1px dashed black;padding-top: 30px;padding-bottom: 30px;border-radius: 5px;background-color: #F5F5F5"></div>
+  </div>
+  <div class="layui-form-item" pane="" style="margin-bottom: 0">
+    <div class="layui-form-item">
+    <label class="layui-form-label">紧急联系人：</label>
+    <div class="layui-input-block">
+      <select name="interest" lay-filter="aihao" id="contMess">
+      </select>
+    </div>
+  </div>
+  </div>
+  <div class="msg-box-container" style="color: #FF0000;font-size: 12px;">
+    <span class="msg-box" id="msg-box" hidden="hidden"></span>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button type="button" class="layui-btn layui-btn-primary" onclick="(backabout())">返回</button>
+    </div>
+  </div>
+</form>
+<script src="/user_user/js/jquery-3.3.1.min.js" charset="utf-8"></script>
+<script src="/user_user/js/layui.js" charset="utf-8"></script>
+<script src="/user_user/js/orderDetailes.js" charset="utf-8"></script>
+</body>
+</html>

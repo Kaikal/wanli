@@ -1,0 +1,141 @@
+  <!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>首页</title>
+  <link rel="icon" href="/user_user/img/logo.png" type="images/png" />
+  <link rel="stylesheet" type="text/css" href="/user_user/css/about.css">
+  <link rel="stylesheet" type="text/css" href="/user_user/css/index.css">
+  <link rel="stylesheet" type="text/css" href="/user_user/css/layui.css">
+  <script type="text/javascript" src="/user_user/js/jquery-3.3.1.min.js"></script>
+</head>
+
+<body>
+  <!-- 头部信息 -->
+  <div class="header">
+    <!-- logo容器 -->
+    <div class="logoContainer" th:data="${session.userName}" th:onclick="|userTipBtn(this.getAttribute('data'))|">
+      <!-- logo图片 -->
+      <img class="logo" src="/img/logo.png" style="cursor: pointer;">
+      <!-- logo标题 -->
+      <span class="title" style="cursor: pointer;">"万里行"——行万里</span>
+    </div>
+    <!-- 用户名 -->
+    <div class="userContainer">
+      <span class="tips">欢迎您，</span>
+      <div class="userTip" id="userTip" th:data="${session.userName}" th:onclick="|userTipBtn(this.getAttribute('data'))|" th:text="${session.userName==null?'请登录':session.userName}">请登录</div>
+      <div id="logOutDiv" th:hidden="${session.userName}==null?true:false"><a class="logOut" onclick="logOut()">退出登录</a></div>
+<!--       <img class="userShowMore" src="/img/showMore-white.png">-->
+    </div>
+  </div>
+  <div class="indexCont">
+    <div class="layui-carousel" id="test10">
+      <div carousel-item="" id="rotationContainer">
+      </div>
+    </div>
+    <div class="itemList">
+      <div class="moreMess" id="moreMessContainer">
+        <table class="leftMess">
+          <tr>
+            <td>热门车辆</td>
+          </tr>
+        </table>
+        <div class="moreMessView">
+          <table>
+            <tr>
+              <td><a href="#" class="moreA">查看更多</a></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="showMes">
+        <div class="adContainer">
+          <a href="https://www.baidu.com/">
+            <img class="rowLongImg" src="/user_user/img/test01.png" />
+          </a>
+        </div>
+        <div class="carListContainer" id="carListContainer">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 底部版权信息 -->
+  <div class="footer">Copyright&#169;2023-2023 Kaikal Designed by YNU Kaikal</div>
+</body>
+<script type="text/javascript" src="/user_user/js/index.js"></script>
+<script src="/user_user/js/layui.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述 JS 路径需要改成你本地的 -->
+<script>
+  layui.use(['carousel', 'form'], function () {
+    var carousel = layui.carousel
+      , form = layui.form;
+
+    //常规轮播
+    carousel.render({
+      elem: '#test1'
+      , arrow: 'always'
+    });
+
+    //改变下时间间隔、动画类型、高度
+    carousel.render({
+      elem: '#test2'
+      , interval: 1800
+      , anim: 'fade'
+      , height: '120px'
+    });
+
+    //设定各种参数
+    var ins3 = carousel.render({
+      elem: '#test3'
+    });
+    //图片轮播
+    carousel.render({
+      elem: '#test10'
+      , width: '778px'
+      , height: '440px'
+      , interval: 5000
+    });
+
+    //事件
+    carousel.on('change(test4)', function (res) {
+      console.log(res)
+    });
+
+    var $ = layui.$, active = {
+      set: function (othis) {
+        var THIS = 'layui-bg-normal'
+          , key = othis.data('key')
+          , options = {};
+
+        othis.css('background-color', '#5FB878').siblings().removeAttr('style');
+        options[key] = othis.data('value');
+        ins3.reload(options);
+      }
+    };
+
+    //监听开关
+    form.on('switch(autoplay)', function () {
+      ins3.reload({
+        autoplay: this.checked
+      });
+    });
+
+    $('.demoSet').on('keyup', function () {
+      var value = this.value
+        , options = {};
+      if (!/^\d+$/.test(value)) return;
+
+      options[this.name] = value;
+      ins3.reload(options);
+    });
+
+    //其它示例
+    $('.demoTest .layui-btn').on('click', function () {
+      var othis = $(this), type = othis.data('type');
+      active[type] ? active[type].call(this, othis) : '';
+    });
+  });
+</script>
+
+</html>

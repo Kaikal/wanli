@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <title>车次</title>
+  <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+  <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+  <link rel="shortcut icon" href="favicon.ico"> <link href="../css/bootstrap.min.css?v=3.3.7" rel="stylesheet">
+  <link href="../css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+  <!-- Data Tables -->
+  <link href="../css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+
+  <link href="../css/animate.css" rel="stylesheet">
+  <link href="../css/style.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>基本 <small>分类，查找</small></h5>
+          <div class="ibox-tools">
+            <a class="collapse-link">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="table_data_tables.html#">
+              <i class="fa fa-wrench"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+              <li><a href="table_data_tables.html#">选项1</a>
+              </li>
+              <li><a href="table_data_tables.html#">选项2</a>
+              </li>
+            </ul>
+            <a class="close-link">
+              <i class="fa fa-times"></i>
+            </a>
+          </div>
+        </div>
+        <div class="ibox-content">
+
+          <table class="table table-striped table-bordered table-hover dataTables-example">
+            <thead>
+            <tr>
+              <th>车次ID</th>
+              <th>司机</th>
+              <th>出发时间</th>
+              <th>车牌号</th>
+              <th>到达时间</th>
+              <th>一等座</th>
+              <th>二等座</th>
+              <th>无座票</th>
+              <!--                                    <th>创建时间</th>-->
+              <!--                                    <th>修改时间</th>-->
+              <th>操作</th>
+            </tr>
+            </thead>
+            <tbody id="listBody">
+            </tbody>
+            <tfoot>
+            <tr>
+              <th>车次ID</th>
+              <th>司机</th>
+              <th>出发时间</th>
+              <th>车牌号</th>
+              <th>到达时间</th>
+              <th>一等座</th>
+              <th>二等座</th>
+              <th>无座票</th>
+              <!--                                    <th>创建时间</th>-->
+              <!--                                    <th>修改时间</th>-->
+              <th>操作</th>
+            </tr>
+            </tfoot>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 全局js -->
+<script src="../js/jquery.min.js?v=2.1.4"></script>
+<script src="../js/bootstrap.min.js?v=3.3.7"></script>
+
+
+
+<script src="../js/plugins/jeditable/jquery.jeditable.js"></script>
+
+<!-- Data Tables -->
+<script src="../js/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="../js/plugins/dataTables/dataTables.bootstrap.js"></script>
+
+<!-- 自定义js -->
+<script src="../js/content.js?v=1.0.0"></script>
+
+
+<!-- Page-Level Scripts -->
+<script>
+  $(document).ready(function () {
+    initTable()
+  });
+  function initTable(){
+    var pageNum;
+    var htmls='';
+    $.ajax({
+      url : "/order/getOrderList",
+      success:function(data) {
+        $("#listBody").html('')
+        for (var index in data.data) {
+          htmls +=
+                  '<tr className = "gradeX" class="grade">'+
+                  '<td class = "id">' + data.data[index].orderId + '</td>' +
+                  '<td class="orderUser">' + data.data[index].orderDriver + '</td>' +
+                  '<td class="startTime">' + data.data[index].orderStartTime + '</td>' +
+                  '<td class="center card">' + data.data[index].orderCard + '</td>' +
+                  '<td class="center endTime">' + data.data[index].orderEndTime + '</td>'+
+                  '<td class="vip">' + data.data[index].orderViPSite + '</td>' +
+                  '<td class="ordinary">' + data.data[index].orderOrdinary + '</td>' +
+                  '<td class="nosite">' + data.data[index].orderNoSite + '</td>' +
+                  // '<td class="center">' + data.data[index].orderInsertTime + '</td>' +
+                  // '<td class="center">' + data.data[index].orderUpdateTime + '</td>' +
+                  '<td class="center">' +
+                  '<button class="btn btn-primary" id="update" data-toggle="modal" data-target="#myModal" data-backdrop="false" onClick="initModel(this)">修改</button>' +
+                  '<button class="btn btn-primary" onClick="toDelete(this)">删除</button>' +
+                  '<button class="btn btn-primary" onClick="toFroze(this)">冻结</button>' +
+                  '</td>' +
+                  '</tr>\n'
+        }
+        var body=document.getElementById('listBody');
+        body.innerHTML = htmls
+        $('.dataTables-example').dataTable();
+      }
+    })
+  }
+</script>
+
+<!--    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>-->
+<!--统计代码，可删除-->
+
+</body>
+
+</html>

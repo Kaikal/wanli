@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>个人信息管理</title>
+  <link rel="icon" href="/user_user/img/logo.png" type="images/png" />
+  <link rel="stylesheet" type="text/css" href="/user_user/css/about.css">
+  <script type="text/javascript" src="/user_user/js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+  <!-- 头部信息 -->
+    <div class="header">
+      <!-- logo容器 -->
+      <div class="logoContainer" onclick="indexBtn()">
+        <!-- logo图片 -->
+        <img class="logo" src="/user_user/img/logo.png" style="cursor: pointer;">
+        <!-- logo标题 -->
+        <span class="title" style="cursor: pointer;">"万里行"——行万里</span>
+      </div>
+      <!-- 用户名 -->
+      <div class="userContainer">
+        <span class="tips">欢迎您，</span>
+        <div class="userTip" id="userTip" onclick="userMessBtn()" th:text="${session.userName}"></div>
+        <div id="logOutDiv"><a class="logOut" onclick="logOut()">退出登录</a></div>
+        <!-- <img class="userShowMore" src="/img/showMore-white.png"> -->
+      </div>
+    </div>
+    <!-- 内容区 -->
+    <div class="conContainer">
+      <!-- 菜单栏 -->
+      <div class="menu">
+        <div class="conListHome" id="indexList" onclick="indexBtn()">
+          <div class="conList">首页</div>
+          <img class="iconHomeImg" src="/user_user/img/home.png">
+        </div>
+        <div class="conListHome" id="orderList" onclick="orderBtn()">
+          <div class="conList">我的订单</div>
+          <img class="iconImg" src="/user_user/img/order.png">
+        </div>
+        <div class="conListHome" id="commenMess_1" onclick="showMore_1()">
+          <div class="conList">常用信息</div>
+          <img class="iconImg" src="/user_user/img/more.png">
+          <img id="shows_1" class="showMore" src="/img/showMore-black.png">
+        </div>
+        <div class="moreMessContainer" id="moreMessContainer_1">
+          <div class="moreMess" id="commenUser" onclick="commenUserBtn()">常用乘客信息</div>
+          <div class="moreMess" id="commenCon" onclick="commenConBtn()">常用联系人</div>
+          <div class="moreMess" id="commenAddr" onclick="commenAddrBtn()">常用地址</div>
+        </div>
+        <div class="conListHome" id="commenMess_2"  onclick="showMore_2()">
+          <div class="conList">个人中心</div>
+          <img class="iconImg" src="/user_user/img/about.png">
+          <img  id="shows_2" class="showMore" src="/user_user/img/showMore-black.png">
+        </div>
+        <div class="moreUserMessContainer"  id="moreMessContainer_2">
+          <div class="moreMess" id="myMess" onclick="myMessBtn()">我的信息</div>
+          <div class="moreMess" id="accountDet" onclick="accountDetBtn()">账户安全</div>
+        </div>
+      </div>
+      <!-- 右侧内容 -->
+      <div class="rightContent">
+        <iframe id="frameCon" name="frameCon" th:src="@{/order.html}"></iframe>
+      </div>
+    </div>
+  <div id="overlay" style="position: fixed;left: 0px;top: 0px;width: 100%;height: 100%;font-size: 16px;background-color: rgba(0, 0, 0, 0.5);filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#7f000000,endColorstr=#7f000000);display: none;">
+    <div class="popup" style="background-color: #ffffff;max-width: 400px;min-width: 200px;height: 240px;border-radius: 5px;margin: 100px auto;text-align: center;">
+      <p class="popup_title" style="height: 60px;background-color: #7ec7b2;line-height: 60px;border-bottom: solid 1px #cccccc;">提示</p>
+      <p class="popup_content" id="popup_content" style="height: 50px;line-height: 50px;padding: 15px 20px;"></p>
+      <div class="popup_btn" style="padding-bottom: 10px;">
+        <button class="confirmBtn" onclick="reviseBtn()"  style="background-color: #009688;width: 40%;height: 40px;cursor: pointer;border: solid 1px #cccccc;border-radius: 5px;margin: 5px 10px;color: #ffffff;">确认</button>
+        <button class="cancelBtn" onclick="cancelBtn()" style="background-color: #DCDCDC;width: 40%;height: 40px;cursor: pointer;border: solid 1px #cccccc;border-radius: 5px;margin: 5px 10px;color: black;">取消</button>
+      </div>
+    </div>
+  </div>
+    <!-- 底部版权信息 -->
+    <div class="footer">Copyright&#169;2023-2023 Kaikal Designed by YNU Kaikal</div>
+</body>
+<script type="text/javascript" src="/user_user/js/about.js"></script>
+</html>

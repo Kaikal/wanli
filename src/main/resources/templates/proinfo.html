@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>购票详情</title>
+<link type="text/css" href="/user_user/css/css.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/user_user/css/layui.css"  media="all">
+    <script src="/user_user/js/jquery-3.3.1.min.js" charset="utf-8"></script>
+    <script src="/user_user/js/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="/user_user/js/jquery.js"></script>
+<script type="text/javascript" src="/user_user/js/js.js"></script>
+<!--<script src="/js/wb.js" type="text/javascript" charset="utf-8"></script>-->
+<script src="/user_user/js/MagicZoom.js" type="text/javascript"></script>
+</head>
+
+<body>
+<div class="header">
+ <!-- logo容器 -->
+ <div class="logoContainer" th:data="${session.userName}" th:onclick="userTipBtn()">
+  <!-- logo图片 -->
+  <img class="logo" src="/user_user/img/logo.png" style="cursor: pointer;">
+  <!-- logo标题 -->
+  <span class="title" style="cursor: pointer;">"万里行"——行万里</span>
+ </div>
+ <!-- 用户名 -->
+ <div class="userContainer">
+  <span class="tips">欢迎您，</span>
+  <div class="userTip" id="userTip" th:data="${session.userName}" th:onclick="|userTipBtn(this.getAttribute('data'))|" th:text="${session.userName==null?'请登录':session.userName}">请登录</div>
+  <div id="logOutDiv" th:hidden="${session.userName}==null?true:false"><a class="logOut" onclick="logOut()">退出登录</a></div>
+  <!--       <img class="userShowMore" src="/img/showMore-white.png">-->
+ </div>
+</div>
+<div class="indexCont">
+ <div class="mianCont">
+   <div class="contRight">
+   <div class="proBox">
+   <div id="tsShopContainer">
+	<div id="tsImgS"><a th:href="${carMess.carPic}" title="Images" class="MagicZoom" id="MagicZoom"><img width="300" height="300" th:src="${carMess.carPic}" /></a></div>
+	<img class="MagicZoomLoading" width="16" height="16" src="/user_user/img/loading.gif" alt="Loading..." />
+    </div><!--tsShopContainer/-->
+    <div class="proBoxRight">
+        <h3 class="proTitle"><span>上海  <====>  昆明</span></h3>
+        <div >车牌号:<span id="carCard" th:text="${carMess.carCard}"></span></div>
+     <div>路线： <span id="carRoute" th:text="${carMess.carRoute}"></span>号线</div>
+     <div>票价：<strong class="red" th:text="${carMess.carPrice}"></strong> </div>
+     <div>司机：<span th:text="${carMess.carPersonName}"></span></div>
+     <div>服务号码：<span th:text="${carMess.carPhone}"></span></div>
+     <div>库存：<strong class="red">[<span>有票</span>] </strong> 从<span>上海</span>出发</div>
+     <div class="shuliang2">
+<!--      数量： <input type="text" value="1" />-->
+      <div class="container">
+          <div class="seatTitle">一等座</div>
+          <div class="numContainer">
+              <input class="changeSubBtn" type="button"  value="-" onclick="minus('VipNum')">
+              <input type="text" oninput = "value=value.replace(/[^\d]/g,'')" readonly="readonly" onclick="addVip()" class="num" id="VipNum" value="0">
+              <input class="changeAddBtn" type="button"  value="+" onclick="addVip()" >
+          </div>
+      </div>
+      <div class="container">
+          <div class="seatTitle">二等座</div>
+          <div class="numContainer">
+              <input class="changeSubBtn" type="button"  value="-" onclick="minus('OrdinaryNum')">
+              <input type="text" oninput = "value=value.replace(/[^\d]/g,'')" readonly="readonly" onclick="addOrd()" class="num" id="OrdinaryNum" value="0">
+              <input class="changeAddBtn" type="button"  value="+" onclick="addOrd()" >
+          </div>
+      </div>
+      <div class="container">
+          <div class="seatTitle">无座</div>
+          <div class="numContainer">
+              <input class="changeSubBtn" type="button"  value="-" onclick="minus('NoSiteNum')">
+              <input type="text" oninput = "value=value.replace(/[^\d]/g,'')" readonly="readonly" onclick="addNos()" class="num" id="NoSiteNum" value="0">
+              <input class="changeAddBtn" type="button"  value="+" onclick="addNos()" >
+          </div>
+      </div>
+         <div class="msg-box-container" style="color: #FF0000;font-size: 12px;">
+             <span class="msg-box" id="msg-box-ticket" hidden="hidden"></span>
+         </div>
+     </div><!--shuliang2/-->
+        <div class="timeContaier">
+            <div class="layui-form-item">
+                <label class="layui-form-label">出发时间：</label>
+                <div class="layui-input-inline">
+                    <input class="layui-input" id="startTime" readonly style="cursor: pointer" placeholder="出发时间" type="text">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">到达时间：</label>
+                    <div class="layui-input-inline">
+                        <input class="layui-input" id="endTime" readonly style="cursor: pointer" placeholder="到达时间" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">时长：</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="identity" readonly onclick="getTimeDifference()" id="timeDifference" style="cursor: default;outline: none" class="layui-input">
+                </div>
+            </div>
+            <div class="msg-box-container" style="color: #FF0000;font-size: 12px;">
+                <span class="msg-box" id="msg-box-time" hidden="hidden"></span>
+            </div>
+        </div>
+     <div class="gc">
+        <button id="buyBtn" onclick="buyBtn()" class="buyBtn">确认购买</button>&nbsp;
+         <button id="backBtn" class="backBtn" onclick="userTipBtn()">返回首页</button>&nbsp;
+     </div><!--gc/-->
+    </div><!--proRight/-->
+    <div class="clears"></div>
+    </div><!--proBox/-->
+    <ul class="fangyuan">
+      <li>行程描述</li>
+      <li>评论</li>
+      <div class="clears"></div>
+    </ul><!--fangyuan/-->
+    <div class="fangList">
+    <div class="fangPar">
+    Information of Vernal Garden 满庭芳花园 <br />
+    Location:<br />
+    Located close to Gubei Carrefour and the Hongqiao Airport, 15 mins drive to international schools and downtown area.<br />
+    Description:<br />
+    It offers a full range of accommodations including freestanding houses, semi-detached houses and condominiums. The units are very spacious, well decorated and fully furnished. Resident can enjoy a complete range of onsite <br />recreational facilities. <br />
+    Facilities:<br />
+    Indoor swimming door, gym, sauna, spa, squash, cafe, childrens playground, restaurant, convenience store, snooker, basketball court. <br />
+    Tv Channel:<br />
+    HBO，TVB，BBC，DISCOVERY，CINEMAX，
+    </div><!--fangPar/-->
+    <img src="/user_user/img/ban1.jpg" width="756" height="310" />
+    </div><!--fangList/-->
+    <div class="fangList">
+     商品评论
+    </div><!--fangList/-->
+   </div><!--contRight/-->
+   <div class="clears"></div>
+  </div><!--cont/-->
+</div>
+<div class="footer">Copyright&#169;2023-2023 Kaikal Designed by YNU Kaikal</div>
+</body>
+<script th:inline="javascript">
+    function buyBtn(){
+        console.dir()
+        var msgBoxTicket = document.getElementById("msg-box-ticket");
+        var msgBoxTime = document.getElementById("msg-box-time");
+        if (parseInt($("#VipNum").val())+parseInt($("#OrdinaryNum").val())+parseInt($("#NoSiteNum").val())==0){
+            msgBoxTime.hidden=true;
+            msgBoxTicket.hidden=false;
+            $("#msg-box-ticket").html("请先选票！");
+            return;
+        }
+        if ($("#startTime").val()==null||$("#startTime").val()==''||$("#endTime").val()==null||$("#endTime").val()==''){
+            msgBoxTicket.hidden=true;
+            msgBoxTime.hidden=false;
+            $("#msg-box-time").html("请先选择出行时间！");
+            return;
+        }
+        var carMess = [[${carMess}]];
+        var VipNum = $("#VipNum").val();
+        var OrdinaryNum = $("#OrdinaryNum").val();
+        var NoSiteNum = $("#NoSiteNum").val();
+        var startTime = $("#startTime").val();
+        var endTime = $("#endTime").val();
+        addOrder(carMess,VipNum,OrdinaryNum,NoSiteNum,startTime,endTime);
+    }
+    function addVip(){
+        var maxNum = [[${ticketNum.get(0).ticketNum}]]
+        var num = document.getElementById("VipNum");
+        if ((num.value)<maxNum){
+            num.value=parseInt(num.value)+1;
+        }
+    }
+    function addOrd(){
+        var maxNum = [[${ticketNum.get(1).ticketNum}]]
+        var num = document.getElementById("OrdinaryNum");
+        if ((num.value)<maxNum){
+            num.value=parseInt(num.value)+1;
+        }
+    }
+    function addNos(){
+        var maxNum = [[${ticketNum.get(2).ticketNum}]]
+        var num = document.getElementById("NoSiteNum");
+        if ((num.value)<maxNum){
+            num.value=parseInt(num.value)+1;
+        }
+    }
+</script>
+</html>

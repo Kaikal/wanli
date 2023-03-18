@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>注册</title>
+    <link rel="shortcut icon" href="/user_user/img/logo.png">
+    <link href="/user_user/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/user_user/css/font-awesome.css" rel="stylesheet">
+    <link href="/user_user/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/user_user/css/animate.css" rel="stylesheet">
+    <link href="/user_user/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/user_user/css/layui.css">
+    <script type="text/javascript" src="/user_user/js/jquery-3.3.1.min.js"></script>
+</head>
+<body class="gray-bg">
+    <div class="middle-box text-center loginscreen   animated fadeInDown" style="width: 400px;text-align: initial">
+        <div>
+            <h3 style="font-size: 25px;cursor: pointer" onclick="toLogin()">欢迎注册万里行</h3>
+            <div class="form-group" style="padding:15px 8px;border: 1px solid #676a6c;border-radius: 5px">
+                <form class="layui-form m-t" role="form" action="">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">账号：</label>
+                        <div class="layui-input-block">
+                            <input type="text" id="account" name="username" lay-verify="required" lay-reqtext="账户名是必填项，不能为空" placeholder="账号" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">手机号：</label>
+                        <div class="layui-input-block">
+                            <input type="tel" name="phone" id="phone" lay-verify="required|phone" lay-reqtext="手机号是必填项，不能为空" autocomplete="off" placeholder="手机号" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">姓名：</label>
+                        <div class="layui-input-block">
+                            <input type="userName" name="userName" id="userName" lay-verify="required" lay-reqtext="姓名是必填项，不能为空" autocomplete="off" placeholder="姓名" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">邮箱：</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="email" id="email" placeholder="邮箱(非必填)" autocomplete="off" class="layui-input"><!--lay-verify="email"-->
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">密码：</label>
+                        <div class="layui-input-block">
+                            <input type="password" id="password" name="password" lay-verify="required|password" lay-reqtext="密码是必填项，不能为空" placeholder="密码" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">确认密码：</label>
+                        <div class="layui-input-block">
+                            <input type="password" id="surePassword" name="password" lay-verify="required|password" lay-reqtext="请确认您的密码" placeholder="请再次输入您的密码" autocomplete="off"  class="layui-input">
+                        </div>
+                        <div class="msg-box" id="msg-box" style="color:#676a6c;line-height: 20px">请填写6到12位密码</div>
+                    </div>
+                    <div id="contractCon" style="margin-left: 110px;margin-bottom: 10px;color: slategrey">我已阅读并<input type="checkbox" name="contract" id="contract" lay-skin="switch" lay-text="同意|不同意">该<a href="#" style="color: #0e9aef">协议</a></div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button type="button" class="layui-btn" lay-filter="register" id="register" onclick="doRegister()">立即注册</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                        <p class="text-muted text-center"><small>已经有账户了？</small><a href="#" onclick="toLogin()">点此登录</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- 全局js -->
+    <script src="/user_user/js/jquery-3.3.1.min.js"></script>
+    <script src="/user_user/js/bootstrap.min.js"></script>
+<!--    <script type="text/javascript" src="/js/index.js"></script>-->
+    <script type="text/javascript" src="/user_user/js/register.js"></script>
+    <!-- iCheck -->
+    <script src="/user_user/js/plugins/iCheck/icheck.min.js"></script>
+    <script src="/user_user/js/layui.js" charset="utf-8"></script>
+    <script>
+
+    </script>
+</body>
+
+</html>

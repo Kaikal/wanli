@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>Layui-BeJSON.com</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="./css/layui.css"  media="all">
+    <link rel="stylesheet" type="text/css" href="./css/about.css">
+</head>
+<body>
+              
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+  <legend>个人信息设置</legend>
+</fieldset>
+ 
+<form class="layui-form" id="messForm" action="">
+    <div class="layui-form-item">
+        <label class="layui-form-label">id：</label>
+        <div class="layui-input-inline">
+            <input type="text" readonly="readonly" name="title" id="id" autocomplete="off" placeholder="请输入您的账号..." th:value="${userMess.getUserAccount()}" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">账号：</label>
+        <div class="layui-input-inline">
+          <input type="text" name="title" id="account" autocomplete="off" placeholder="请输入您的账号..." th:value="${userMess.getUserAccount()}" class="layui-input">
+        </div>
+      </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">手机号：</label>
+            <div class="layui-input-inline">
+                <input type="tel" name="phone" id="phone" autocomplete="off" placeholder="请输入您的手机号..." th:value="${userMess.getUserPhone()}" class="layui-input">
+            </div>
+        </div>
+    </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">姓名：</label>
+    <div class="layui-input-inline">
+      <input type="text" name="username" id="userName" placeholder="请输入您的姓名..." autocomplete="off" th:value="${userMess.getUserName()}" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">邮箱：</label>
+      <div class="layui-input-inline">
+        <input type="text" name="email" id="email" placeholder="请输入您的邮箱..." th:value="${userMess.getUserEmail()}" class="layui-input">
+      </div>
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+    <label class="layui-form-label">验证身份证</label>
+    <div class="layui-input-inline">
+      <input type="text" name="identity" id="userCode" placeholder="请输入您的身份证号..." th:value="${userMess.getUserCode()}" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">生日：</label>
+    <div class="layui-input-inline">
+      <input type="date" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" th:value="${#dates.format(userMess.getUserBirth(),'yyyy-MM-dd')}" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item" style="margin-bottom: 0">
+    <label class="layui-form-label">性别：</label>
+    <div class="layui-input-block">
+      <input type="radio" name="sex" checked="checked" id="sexMale" value=0  title="男">
+      <input type="radio" name="sex" id="sexFemale" value=1 title="女">
+    </div>
+  </div>
+    <div class="msg-box-container" style="color: #FF0000;font-size: 12px;">
+        <span class="msg-box" id="msg-box" hidden="hidden"></span>
+    </div>
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button type="button" class="layui-btn" onclick="updateAdmin()">确认修改</button>
+      <button type="button" class="layui-btn layui-btn-primary" onclick="resetBtn()">重置</button>
+    </div>
+  </div>
+</form>
+<script src="./js/jquery.min.js" charset="utf-8"></script>
+<script src="./js/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="./js/about.js"></script>
+<script th:inline="javascript">
+    var sex;
+    $(function () {
+        initModel()
+    })
+    function initModel() {
+        $.ajax({
+            url: "/admin/getAdmin",
+            type:"Post",
+            success: function (data) {
+                $("#id").val(data.data.adminId)
+                $("#account").val(data.data.adminAccount)
+                $("#email").val(data.data.adminEmail)
+                $("#phone").val(data.data.adminPhone)
+                sex = data.data.adminSex
+                console.log(sex)
+                if (sex==0) {
+                    $("#sexMale").prop("checked", "checked")
+                }else {
+                    $("#sexFemale").prop("checked", "checked")
+                }
+                $("#date").val(data.data.adminBirth)
+                $("#userCode").val(data.data.adminCode)
+                $("#userName").val(data.data.adminName)
+                layui.use('form', function () {
+                    var form = layui.form;
+                    form.render("radio")
+                })
+            }
+        })
+    }
+    function resetBtn(){
+     initModel(1)
+    }
+    function updateAdmin(){
+        var data={
+            adminId:$("#id").val(),
+            adminAccount:$("#account").val(),
+            adminEmail:$("#email").val(),
+            adminPhone:$("#phone").val(),
+            adminSex:$("input[name='sex']:checked").val(),
+            adminBirth:$("#date").val(),
+            adminCode:$("#userCode").val(),
+            adminName:$("#userName").val()
+        }
+        $.ajax({
+            url:"/admin/updateAdmin",
+            data:JSON.stringify(data),
+            type: "POST",
+            contentType:"application/json;chaset=UTF-8",
+            success:function (){
+                initModel(data.adminId)
+            }
+        })
+    }
+</script>
+</body>
+</html>

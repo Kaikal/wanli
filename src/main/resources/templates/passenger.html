@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>乘客信息</title>
+    <link rel="stylesheet" type="text/css" href="/user_user/css/about.css">
+</head>
+<body>
+    <table class="passTable">
+        <tr class="tableF">
+            <th colspan="8">
+                <span class="passTitle">乘客姓名</span>
+                <input type="text" class="passTxt" placeholder="请输入您要查询的名字...">
+                <button class="passBtn" type="button" >查询</button>
+                <button class="passBtn" type="button" >新增</button>
+                <button class="passBtn" type="button" >删除</button>
+            </th>
+        </tr>
+        <tr class="tableS">
+            <th class="tableSListCheck">
+                <input type="checkbox" class="checkAll" name="selectAll" id="selectAll">
+                <label for="selectAll">全选</label>
+            </th>
+            <th class="tableSListName">姓名</th>
+            <th class="tableSListPhone">手机</th>
+            <th class="tableSListType">证件类型</th>
+            <th class="tableSListId">证件号码</th>
+            <th class="tableSListC">国籍(国家/地区)</th>
+            <th class="tableSListSex">性别</th>
+            <th class="tableSListCard">常旅客卡</th>
+            <th class="tableSListOption" colspan="3">操作</th>
+        </tr>
+    </table>
+    <div id="conPassContainer">
+    </div>
+    <script type="text/javascript" src="/user_user/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/user_user/js/editPass.js"></script>
+    <script type="text/javascript" src="/user_user/js/passenger.js"></script>
+</body>
+</html>

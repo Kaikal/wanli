@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>订单</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="/user_user/css/layui.css">
+  <link rel="stylesheet" href="/user_user/css/about.css">
+</head>
+<body style="background: none;background-color: #fafafa;">
+<div class="layui-tab layui-tab-card">
+  <!-- 内容导航 -->
+  <ul class="layui-tab-title">
+    <li class="layui-this">全部订单</li>
+    <li>未出行</li>
+    <li>待支付</li>
+    <li>待点评</li>
+  </ul>
+  <!-- 票列表信息 -->
+  <div class="layui-tab-content">
+    <div class="layui-tab-item layui-show" id="liatContainer">
+    </div>
+    <div class="layui-tab-item" id="noTravelContainer"></div>
+    <div class="layui-tab-item" id="unpaidOrderContainer"></div>
+    <div class="layui-tab-item" id="commOrderContainer"></div>
+  </div>
+</div>
+<script src="/user_user/js/layui.js"></script>
+<script src="/user_user/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/user_user/js/editPass.js"></script>
+<script type="text/javascript" src="/user_user/js/order.js"></script>
+</body>
+</html>

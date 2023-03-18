@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地址</title>
+    <link rel="stylesheet" type="text/css" href="/user_user/css/about.css">
+</head>
+<body>
+    <table class="passTable">
+        <tr class="tableF">
+            <th colspan="8">
+                <span class="passTitle">关键字</span>
+                <input type="text" class="passTxt" placeholder="地址/收件人/简称">
+                <button class="passBtn" type="button" >查询</button>
+                <button class="passBtn" type="button" >新增</button>
+            </th>
+        </tr>
+        <tr class="tableS">
+            <th class="tableSListCheck">
+                <input type="checkbox" class="checkAll" name="selectAll" id="selectAll">
+                <label for="selectAll">全选</label>
+            </th>
+            <th class="tableAListName">收件人</th>
+            <th class="tableAListType">省份</th>
+            <th class="tableAListId">城市</th>
+            <th class="tableAListC">区县</th>
+            <th class="tableAListSex">详细地址</th>
+            <th class="tableAListCard">邮编</th>
+            <th class="tableSListOption" colspan="3">操作</th>
+        </tr>
+<!--        <tr class="tableT">-->
+<!--            <td class="tableTListCheck">-->
+<!--                <input type="checkbox" class="checkOne" name="selectOne" id="selectOne">-->
+<!--            </td>-->
+<!--            <td class="tableTListPhone">管洪平</td>-->
+<!--            <td class="tableTListType">云南省</td>-->
+<!--            <td class="tableTListId">昆明市</td>-->
+<!--            <td class="tableTListC">呈贡区</td>-->
+<!--            <td class="tableTListSex">云南大学呈贡校区桦苑四幢</td>-->
+<!--            <td class="tableTListCard">650504</td>-->
+<!--            <td class="EditBtn">编辑</td>-->
+<!--            <td class="deleteBtn">删除</td>-->
+<!--        </tr>-->
+    </table>
+    <div id="conAddrContainer">
+    </div>
+</body>
+<script type="text/javascript" src="/user_user/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/user_user/js/editPass.js"></script>
+<script type="text/javascript" src="/user_user/js/address.js"></script>
+</html>

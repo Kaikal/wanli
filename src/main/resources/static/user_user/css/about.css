@@ -1,0 +1,418 @@
+body{
+    margin: 0;
+    background: url("../img/background.png");
+}
+/* 头部容器 */
+.header{
+    width: 1519px;
+    height: 60px;
+    background-color: #363636;
+    color: #157375;
+    display: flex;
+    border-radius: 4px;
+}
+/* logo以及标题 */
+.logoContainer{
+    font-family: "黑体";
+    font-weight: bolder;
+    cursor: pointer;
+    width: 330px;
+    font-size: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+}
+.logo{
+    width: 60px;
+    margin: 0;
+    padding: 0;
+}
+.tip{
+    position: fixed;
+    margin: 0 auto;
+    width: 400px;
+    height: 200px;
+    background-color: #fff;
+    border: 3px solid rgb(189, 189, 189);
+    left: 0;
+    right: 0;
+    top: 25%;
+    display: none;
+}
+.msg-box-container{
+    margin-left: 120px;
+    margin-bottom: 20px;
+}
+header .close{
+    font-weight: bolder;
+    cursor: pointer;
+    opacity: 0.8;
+}
+.conEdit{
+    width: 94%;
+    height: 130px;
+    border: 1px solid #363636;
+    margin-top: 20px;
+    margin-left: 20px;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+}
+.title{
+    margin: 0;
+    padding: 0;
+}
+/* 用户名显示 */
+.userContainer{
+    flex:1;           
+    justify-content: flex-end;
+    display: flex;
+    align-items: center;
+    margin-right: 165px;
+}
+.tips{
+    color: #BEBEBE;
+}
+.userNameContainer{
+    color: #157375;
+    cursor: pointer;
+}
+.userShowMore{
+    width: 25px;
+    margin-left: 5px;
+}
+/* 内容 */
+.conContainer{
+    width: 1510px;
+    height: 630px;
+    margin-top: 20px;
+}
+/* 导航 */
+.conListHome{
+    height: 43px;
+    width: 177px;
+    padding-top: 20px;
+    padding-left: 20px;
+    cursor: pointer;
+    background-color: #ffffff;
+    border-bottom: 1px solid #BEBEBE;
+}
+#orderList{
+    opacity: 0.6;
+    background-color: #B5B5B5;
+}
+.conListHome:hover{
+    opacity: 0.6;
+    background-color: #B5B5B5;
+}
+.showMore{
+    width: 25px;
+    vertical-align: inherit;
+}
+.conList{
+    display: inline-block;
+}
+/* 导航栏图标 */
+.iconImg{
+    width: 20px;
+    vertical-align: sub;
+    margin-left: 45px;
+}
+.iconHomeImg{
+    width: 20px;
+    vertical-align: sub;
+    margin-left: 78px;
+}
+.menu{
+    display: inline-block;
+    width: 197px;
+    background-color: white;
+    height: fit-content;
+    margin-left: 160px;
+    border: 1px solid black;
+    border-radius: 2px;
+}
+.moreMess{
+    height: 43px;
+    padding-top: 20px;
+    padding-left: 55px;
+    cursor: pointer;
+    border-bottom: 1px solid #BEBEBE;
+}
+.moreMess:hover{
+    opacity: 0.6;
+    background-color: #B5B5B5;
+}
+.moreUserMessContainer,.moreMessContainer{
+    display: none;
+}
+/* 右侧内容 */
+.rightContent{
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 20px;
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 2px;
+    height: 650px;
+    width: 930px;
+    border-radius: 10px;
+    padding: 10px;
+}
+.layui-tab-title{
+    background-color: #ededed !important;
+    box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.3);
+}
+iframe{
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+.layui-tab-content{
+    height: 550px;
+}
+/* 票列表 */
+.ticketCon{
+    width: 880px;
+    height: 115px;
+    border: #BEBEBE 1px solid;
+    border-radius: 8px;
+    margin-left: 15px;
+    margin-top: 5px;
+    padding: 8px;
+    cursor: pointer;
+}
+.ticketCon:hover{
+    background-color: #ededed;
+    margin-top: 4px;
+    box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.5);
+}
+.timeCon{
+    width: 100%;
+    height: 55%;
+    display: flex;
+}
+.ticketTime{
+    flex: 1;
+    text-align: center;
+}
+.dateItem{
+    font-size: 14px;
+    opacity: 0.5;
+}
+.stateItem{
+    font-size: 13px;
+    margin-left: 215px;
+    margin-top: -46px;
+    color: #157173;
+}
+.timeItem{
+    font-size: 30px;
+    font-weight: bolder;
+}
+.trainNo{
+    color: #157173;
+    font-size: 20px;
+}
+.takeTime{
+    font-size: 13px;
+    opacity: 0.7;
+}
+.siteCon{
+    display: flex;
+}
+.ViPSite,.ordinary,.NoSite{
+    flex: 1;
+    text-align: center;
+}
+.tickState{
+    font-size: 15px;
+    font-weight: 600;
+    color: #157173;
+}
+/* 用户常用信息 */
+.passTitle{
+    color: #363636;
+    font-size: 15px;
+    font-weight: 500;
+    vertical-align: middle;
+}
+.passTxt{
+    outline: none;
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid #BEBEBE;
+    border-radius: 2px;
+    width: 200px;
+    height: 20px;
+}
+.userTip{
+    cursor: pointer;
+    font-weight: 600;
+}
+.userTip:hover{
+    color: #00f7de;
+}
+.logOut{
+    margin-left: 13px;
+    color: #157375;
+    font-size: 12px;
+    cursor: pointer;
+    vertical-align: unset;
+}
+.logOut:hover{
+    color: #00f7de;
+}
+.tableF{
+    text-align: left;
+}
+.passTable{
+    background-color: #f7f7f7;
+    width: 100%;
+}
+.checkAll{
+    margin: 0;
+    vertical-align: middle;
+}
+.userMess{
+    font-size: 13px;
+    color: #363636;
+}
+.passBtn{
+    vertical-align: middle;
+    border: 1px solid #BEBEBE;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.tableS{
+    font-size: 13px;
+    color: #B5B5B5;
+}
+.tableSListCheck,.tableTListCheck{
+    width: 95px;
+}
+.tableSListSex,.tableTListSex{
+    width: 55px;
+}
+.tableSListC,.tableTListC{
+    width: 95px
+}
+.tableSListCard,.tableTListCard{
+    width: 52px;
+}
+.tableSListName,.tableTListName{
+    width: 100px;
+}
+.tableSListPhone,.tableTListPhone{
+    width: 120px;
+}
+.tableSListType,.tableTListType{
+    width: 52px;
+}
+.tableSEmail,.tableEmail{
+    width: 440px;
+}
+.tableSListId,.tableTListId{
+    width: 180px;
+}
+.tableT{
+    cursor: pointer;
+    height: 35px;
+    text-align: center;
+    font-size: 13px;
+    background-color: white;
+}
+.tableT:hover{
+    background-color: #BEBEBE;
+}
+.tableAListName,.tableAListName{
+    width: 80px;
+}
+.tableAListType,.tableAListType{
+    width: 80px;
+}
+.tableAListId,.tableAListId{
+    width: 80px;
+}
+.tableAListC,.tableAListC{
+    width: 80px;
+}
+.tableAListSex,.tableAListSex{
+    width: 290px;
+}
+.tableAListCard,.tableAListCard{
+    width: 80px;
+}
+.queryBtn,.EditBtn{
+    border-radius: 4px;
+    color: #f7f7f7;
+    background-color: #66CDAA;
+}
+.queryBtn:hover,.EditBtn:hover{
+    color: #f7f7f7;
+    background-color: #157375;
+}
+.deleteBtn{
+    border-radius: 4px;
+    color: #f7f7f7;
+    background-color: #FF0000;
+}
+.deleteBtn:hover{
+    background-color: #B22222;
+}
+
+.checkOne{
+    margin-right: 34px;
+}
+.contEdit{
+    width: 94%;
+    height: 130px;
+    border: 1px solid #363636;
+    margin-top: 20px;
+    margin-left: 20px;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+}
+.successImg{
+    width: 60px;
+    height: 60px;
+    vertical-align: middle;
+}
+.statePart{
+    flex: 4;
+    text-align: center;
+    vertical-align: middle;
+    margin-top: 45px;
+    font-size: 14px;
+    color: #363636;
+}
+.statePartEdit{
+    flex: 1;
+    text-align: center;
+    vertical-align: middle;
+    margin-top: 56px;
+    font-size: 14px;
+    color: #363636;
+}
+.stateTitle{
+    vertical-align: middle;
+    font-weight: 700;
+}
+.statePartF{
+    flex: 2;
+    text-align: center;
+    vertical-align: middle;
+    margin-top: 36px;
+    font-size: 20px;
+}
+.advice{
+    flex: 2;
+    text-align: center;
+    margin-top: 55px;
+}
+/* 版权信息 */
+.footer{
+    text-align: center;
+    margin-top: 60px;
+}
